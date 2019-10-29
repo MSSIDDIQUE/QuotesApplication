@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "992103709448",
+    "firebase_url": "https://quotesapplication-38fda.firebaseio.com",
+    "project_id": "quotesapplication-38fda",
+    "storage_bucket": "quotesapplication-38fda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992103709448:android:a2b031ff605740ad3acabd",
+        "android_client_info": {
+          "package_name": "com.baymax.quotesapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992103709448-8ldjcqarq81tv9kch399der1cagu6oju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.baymax.quotesapplication",
+            "certificate_hash": "7a40f0138a6b01e9561024ff94598e0630994ca1"
+          }
+        },
+        {
+          "client_id": "992103709448-lt0o377ooec9hn56t949i2q4e8lbrvng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBonh2RFMc8s51xhlKx7q_j0qyCnKgVf_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992103709448-lt0o377ooec9hn56t949i2q4e8lbrvng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
