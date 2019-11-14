@@ -3,6 +3,7 @@ package com.baymax.quotesapplication.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.baymax.quotesapplication.data.db.entity.Quote
 import com.google.firebase.firestore.FirebaseFirestore
 
 class FirestoreSource (){
@@ -11,14 +12,14 @@ class FirestoreSource (){
         FirebaseFirestore.getInstance()
     }
 
-    private val quoteList = mutableListOf<Quotes>()
-    private val quotes = MutableLiveData<List<Quotes>>()
+    private val quoteList = mutableListOf<Quote>()
+    private val quotes = MutableLiveData<List<Quote>>()
 
     init {
         quotes.value = quoteList
     }
 
-    fun addQuotes(quote:Quotes)
+    fun addQuotes(quote:Quote)
     {
         val map:HashMap<String,String> = HashMap<String,String>()
         map.put("Quote",quote.quote)
@@ -29,7 +30,7 @@ class FirestoreSource (){
         }
     }
 
-    fun getQuotes(): LiveData<List<Quotes>>
+    fun getQuotes(): LiveData<List<Quote>>
     {
         firestore.collection("Quotes").get().addOnCompleteListener { task ->
             if (task.isSuccessful)
@@ -37,12 +38,14 @@ class FirestoreSource (){
                 quoteList.clear()
                 for (quote in task.result!!)
                 {
-                    quoteList.add(Quotes(quote.get("Quote").toString(),quote.get("Author").toString()))
+                    quoteList.add(Quote(quote.get("Quote").toString(),quote.get("Author").toString()))
                 }
+                Log.d("EVENT","Live Data is updated")
             }
         }
-        quotes.value = quoteList
-        Log.d("###","data is fetched"+quotes)
+            .addOnCompleteListener {
+                quotes.value = quoteList
+            }
         return quotes
     }
 

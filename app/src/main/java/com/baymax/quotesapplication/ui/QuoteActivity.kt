@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.baymax.quotesapplication.R
 import com.baymax.quotesapplication.data.Quotes
+import com.baymax.quotesapplication.data.db.entity.Quote
 import com.baymax.quotesapplication.ui.adapters.QuoteListAdapter
 import com.baymax.quotesapplication.utilities.InjectorUtils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,19 +29,18 @@ class QuoteActivity : AppCompatActivity() {
         initializeUi()
     }
     private fun initializeUi(){
-        val factory = InjectorUtils.provideQuoteViewModelFactory()
+        val factory = InjectorUtils.provideQuoteViewModelFactory(this)
         val viewModel = ViewModelProvider(this,factory).get(QuoteViewModel::class.java)
         viewModel.getQuotes().observe(this, Observer {
             quotes->
-            adapter = QuoteListAdapter(quotes as ArrayList<Quotes>)
+            adapter = QuoteListAdapter(quotes as ArrayList<Quote>)
             Log.d("###","Adapter is set on list ")
             linearLayoutManager = LinearLayoutManager(this)
             recycler_view.layoutManager = linearLayoutManager
             recycler_view.adapter = adapter
-            adapter.notifyDataSetChanged()
         })
         fab.setOnClickListener { view ->
-            val quote = Quotes(edit_quote.text.toString(),"__"+edit_author.text.toString())
+            val quote = Quote(edit_quote.text.toString(),"__"+edit_author.text.toString())
             viewModel.addQuotes(quote)
             Snackbar.make(view, "Your Quote is added to the list", Snackbar.LENGTH_LONG).show()
             edit_quote.setText("")
